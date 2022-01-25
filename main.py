@@ -4,6 +4,10 @@ import json
 
 token = "2096~w2GsDFAC1Txmj3NGtf93Aq1zaL7UiIfpFBVMgFx3yNhi6qFbbiDoaSVmfKrS7WYP"
 
+def delete_files(file_id = ""):
+    res = requests.delete(f"https://gatech.instructure.com/api/v1/files/{file_id}", headers={"Authorization": f"Bearer {token}"})
+    print(res.json())
+
 #TODO: replace print statements with sane return statements
 def list_files(course_id="", folder_id="", content_type="", sort="name"):
     if course_id != "":
