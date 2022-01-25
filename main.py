@@ -1,4 +1,3 @@
-from wsgiref import headers
 import requests
 
 token = "2096~w2GsDFAC1Txmj3NGtf93Aq1zaL7UiIfpFBVMgFx3yNhi6qFbbiDoaSVmfKrS7WYP"
