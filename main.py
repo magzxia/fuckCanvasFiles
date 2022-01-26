@@ -1,15 +1,14 @@
-from canvasapi import Canvas
-import json
+from canvasapi import Canvas, file
+import requests
 
 api_url = "https://gatech.instructure.com/"
 api_key = "2096~w2GsDFAC1Txmj3NGtf93Aq1zaL7UiIfpFBVMgFx3yNhi6qFbbiDoaSVmfKrS7WYP"
 
-class File:
-    def __init__(self, id, filename, display_name, size):
-        self.id = id
-        self.filename = filename
-        self.display_name = display_name
-        self.size = size
+class File(file.File):
+    def __init__(self, file: file.File):
+        self._requester = file._requester
+        self.id = file.id
+        self.filename = file.filename
 
     def __eq__(self, other):
         if self.filename == other.filename:
@@ -27,14 +26,21 @@ def main():
     #getting all files
     files = []
     for file in course.get_files():
-            f = File(file.id, file.filename, file.display_name, file.size)
-            files.append(f)
+            files.append(File(file))
 
     dups = []
     for file in files:
         if files.count(file) > 1 and file not in dups:
             dups.append(file)
-            print(f"{file} ..count:{files.count(file)}")
+            #print(f"{file} ..count:{files.count(file)}")
+
+    for file in files:
+        if file in dups:
+            dup_id = dups.index(file)
+            if file.id != dups[dup_id].id:
+                print(f"deleting {file}")
+                file.delete()            
+            
     
 if __name__ == "__main__":
     main()
