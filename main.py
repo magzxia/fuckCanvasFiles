@@ -21,19 +21,21 @@ class File(file.File):
 
 def main():
     canvas = Canvas(api_url, api_key)
-    course = canvas.get_course("284188")
+    course = canvas.get_course(input("Enter course id: "))
 
     #getting all files
+    print("fetching files")
     files = []
     for file in course.get_files():
             files.append(File(file))
 
+    print("finding duplicates")
     dups = []
     for file in files:
         if files.count(file) > 1 and file not in dups:
             dups.append(file)
-            #print(f"{file} ..count:{files.count(file)}")
 
+    print("deleting duplicates")
     for file in files:
         if file in dups:
             dup_id = dups.index(file)
