@@ -1,9 +1,10 @@
 # fuckCanvasFiles
+Utility to delete duplicate files in canvas courses
 
 # Installation
 
 Clone the repository and install the `canvasapi` module for python \
-`pip install canvasapi` \
+`pip install canvasapi`
 
 # Usage
 
